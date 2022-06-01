@@ -29,7 +29,7 @@ def draw_rectangle(img, lpos, rpos, offset=0):
     return img
 
 # You are to find "left and light position" of road lanes
-#여기부터
+# 여기부터
 def make_coordinates(image, line_parameters):
     slope, y_intercept, x_intercept = line_parameters
     y2 = Height*2/5
@@ -133,7 +133,7 @@ def process_image(frame):
     frame = draw_rectangle(frame, lpos, rpos, offset=Offset)
     #print(left_slope)
     return (lpos, rpos), frame, [left_slope, right_slope]
-#여기까지 건들면 될듯
+# 여기까지 건들면 될듯
 
 def draw_steer(image, steer_angle):
     global Width, Height, arrow_pic
