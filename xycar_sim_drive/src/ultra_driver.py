@@ -35,7 +35,7 @@ def callback(msg):
     r = msg.data[6] # 우측
 
     l = msg.data[7] #좌측
-    print(msg.data)
+    #print(msg.data)
 
 rospy.init_node('guide')
 motor_pub = rospy.Publisher('xycar_motor_msg', Int32MultiArray, queue_size=1)
