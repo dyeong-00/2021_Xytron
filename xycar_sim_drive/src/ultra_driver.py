@@ -24,16 +24,17 @@ def callback(msg):
     global r
 
     global l
+    
+    # 초음파 센서 메세지
+    fl = msg.data[0] # 정면좌측
 
-    fl = msg.data[0]
+    fm = msg.data[1] # 정면중앙
 
-    fm = msg.data[1]
+    fr = msg.data[2] # 정면우측
 
-    fr = msg.data[2]
+    r = msg.data[6] # 우측
 
-    r = msg.data[6]
-
-    l = msg.data[7]
+    l = msg.data[7] #좌측
     print(msg.data)
 
 rospy.init_node('guide')
@@ -45,13 +46,15 @@ xycar_msg = Int32MultiArray()
 while not rospy.is_shutdown():
     angle = 0
     if fm <= 300:
-        if (fr-fl)>100:
-            angle=50
-        elif (fr-fl)<-100:
-            angle = -50
+        # 정면에 벽이 가까워지고 있는 경우
+        if (fr-fl)>100: # 차량 우측에 길이 나있는 경우
+            angle=50 # 우회전
+        elif (fr-fl)<-100: #차량 좌측에 길이 나있는 경우
+            angle = -50 #좌회전
         else:
             angle = 0
     else:
+        # 차선 중앙에서 주행하도록 steering angle 조정
         if fl <= 100:
             angle = 50
         if fr <= 100:
